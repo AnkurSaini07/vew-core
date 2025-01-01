@@ -1,0 +1,16 @@
+name: Pull Request Validation
+on:
+  pull_request:  # Trigger workflow on PR events
+    types: [opened, synchronize, reopened]  # Run on these PR actions
+    branches:
+      - main  # Only trigger for PRs targeting the `main` branch
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    steps:
+
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@v4
+      - run: bun install
+      - run: bun check
